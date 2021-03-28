@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"github.com/gofiber/fiber"
-	"golang.org/x/crypto/bcrypt"
 	"goreact/database"
 	"goreact/models"
 )
@@ -22,8 +21,7 @@ func CreateUser(c *fiber.Ctx) error {
 		return err
 	}
 
-	password, _ := bcrypt.GenerateFromPassword([]byte("1234"), 14)
-	user.Password = password
+	user.SetPassword("1234")
 
 	database.DB.Create(&user)
 
